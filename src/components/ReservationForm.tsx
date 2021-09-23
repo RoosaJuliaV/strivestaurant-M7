@@ -14,6 +14,7 @@ const ReservationForm = () => {
   const [reservation, setReservation] = useState(newReservation)
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    
     let id = e.target.id
 
     setReservation({
