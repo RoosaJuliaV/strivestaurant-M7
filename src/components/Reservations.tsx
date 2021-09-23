@@ -3,10 +3,12 @@ import { Container, Col, Row, ListGroup } from 'react-bootstrap'
 import Loading from './Loading'
 import Error from './Error'
 import ReservationForm from './ReservationForm'
+import Reservation from "../types/Reservation"
+
 
 const Reservations = () => {
 
-    const [reservations, setReservations] = useState([])
+    const [reservations, setReservations] = useState<Reservation[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
 
@@ -14,7 +16,7 @@ const Reservations = () => {
         const getData = async () => {
             try {
                 let response = await fetch('https://striveschool.herokuapp.com/api/reservation')
-                let newReservations = await response.json()
+                let newReservations = await response.json() as Reservation[]
                 setReservations(newReservations)
                 setIsLoading(false)
             } catch (error) {
@@ -33,20 +35,19 @@ const Reservations = () => {
                     {isLoading && <Loading />}
                     {isError && <Error />}
                     {
-                        (
-                            reservations.length === 0
+                         reservations.length === 0
                             && isLoading === false
                             && isError === false
-                        )
-                            ? <p>NO RESERVATIONS</p>
-                            : <ListGroup>
-                                {reservations.map(reservation =>
+                        ? (
+                            <p>NO RESERVATIONS</p>
+                            ) : ( <ListGroup>
+                                {reservations.map((reservation => (
                                     <ListGroup.Item key={reservation._id}>
                                         {reservation.name}
                                     </ListGroup.Item>
-                                )}
+                                )))}
                             </ListGroup>
-                    }
+                                )}
                 </Col>
             </Row>
             <Row className="justify-content-center mt-3">
