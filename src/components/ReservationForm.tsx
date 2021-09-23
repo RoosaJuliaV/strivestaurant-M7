@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 
-const emptyReservation = {
+const newReservation = {
   name: "",
   phone: "",
   numberOfPersons: 1,
@@ -11,7 +11,7 @@ const emptyReservation = {
 }
 
 const ReservationForm = () => {
-  const [reservation, setReservation] = useState(emptyReservation)
+  const [reservation, setReservation] = useState(newReservation)
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
     let id = e.target.id
@@ -37,7 +37,7 @@ const ReservationForm = () => {
       })
       if (response.ok) {
         alert("Reservation saved!")
-        setReservation(emptyReservation)
+        setReservation(newReservation)
       } else {
         alert("Houston we had a problem, try again!")
       }

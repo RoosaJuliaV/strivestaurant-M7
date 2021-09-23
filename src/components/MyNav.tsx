@@ -2,7 +2,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 import { Link, useLocation } from 'react-router-dom'
 
 interface NavProps {
-    title: string
+  title: string
 }
  
 const MyNav = ({ title }: NavProps) => {
